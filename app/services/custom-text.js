@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 const {
   computed,
+  defineProperty,
+  on,
   Service
 } = Ember;
 
@@ -26,11 +28,9 @@ function customWithDefault() {
 export default Service.extend({
   customTexts: [],
 
-  siteName: customWithDefault(),
-
-  aboutMe: customWithDefault(),
-
-  greeting: customWithDefault(),
-
-  contactMe: customWithDefault()
+  defineTexts: on('init', function() {
+    Object.keys(DEFAULTS).forEach((key) => {
+      defineProperty(this, key, customWithDefault());
+    });
+  })
 });
