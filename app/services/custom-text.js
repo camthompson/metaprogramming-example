@@ -5,8 +5,8 @@ const {
   Service
 } = Ember;
 
-function customWithDefault(propertyName, defaultValue) {
-  return computed(function() {
+function customWithDefault(defaultValue) {
+  return computed(function(propertyName) {
     const custom = this.get('customTexts').findBy('key', propertyName);
     return custom ? custom.get('value') : defaultValue;
   });
@@ -15,11 +15,11 @@ function customWithDefault(propertyName, defaultValue) {
 export default Service.extend({
   customTexts: [],
 
-  siteName: customWithDefault('siteName', 'My Cool Site'),
+  siteName: customWithDefault('My Cool Site'),
 
-  aboutMe: customWithDefault('aboutMe', "I'm cool, and so is this site!"),
+  aboutMe: customWithDefault("I'm cool, and so is this site!"),
 
-  greeting: customWithDefault('greeting', 'Welcome!'),
+  greeting: customWithDefault('Welcome!'),
 
-  contactMe: customWithDefault('contactMe', 'Leave me alone, please')
+  contactMe: customWithDefault('Leave me alone, please')
 });
