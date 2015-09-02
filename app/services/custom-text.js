@@ -5,21 +5,32 @@ const {
   Service
 } = Ember;
 
-function customWithDefault(defaultValue) {
+const DEFAULTS = create({
+  siteName: 'My Cool Site',
+  aboutMe: "I'm cool, and so is this site!",
+  greeting: 'Welcome!',
+  contactMe: 'Leave me alone, please'
+});
+
+function create() {
+  return Ember.Object.create(...arguments);
+}
+
+function customWithDefault() {
   return computed(function(propertyName) {
     const custom = this.get('customTexts').findBy('key', propertyName);
-    return custom ? custom.get('value') : defaultValue;
+    return custom ? custom.get('value') : DEFAULTS.get(propertyName);
   });
 }
 
 export default Service.extend({
   customTexts: [],
 
-  siteName: customWithDefault('My Cool Site'),
+  siteName: customWithDefault(),
 
-  aboutMe: customWithDefault("I'm cool, and so is this site!"),
+  aboutMe: customWithDefault(),
 
-  greeting: customWithDefault('Welcome!'),
+  greeting: customWithDefault(),
 
-  contactMe: customWithDefault('Leave me alone, please')
+  contactMe: customWithDefault()
 });
