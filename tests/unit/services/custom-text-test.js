@@ -1,12 +1,11 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('service:custom-text', 'Unit | Service | custom text', {
-  // Specify the other units that are required for this test.
-  // needs: ['service:foo']
-});
+moduleFor('service:custom-text');
 
-// Replace this with your real tests.
-test('it exists', function(assert) {
-  var service = this.subject();
-  assert.ok(service);
+test('It has default values', function(assert) {
+  const service = this.subject();
+  assert.equal(service.get('siteName'), 'My Cool Site');
+  assert.equal(service.get('aboutMe'),  "I'm cool, and so is this site!");
+  assert.equal(service.get('greeting'),  'Welcome!');
+  assert.equal(service.get('contactMe'), 'Leave me alone, please');
 });
